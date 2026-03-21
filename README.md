@@ -1,1 +1,45 @@
-add north star document
+the why behind everything
+
+by lawrenthia usher, director of culture, community and inclusion at gusto
+
+Imagine a dashboard to justify healthy culture. Even though data point after data point exists from well respected places... culture, community, and inclusion are always put on the backburner.
+
+Inclusion is often seen as the thing that gets in the way of innovation. Too many cooks in the kitchen. Culture feels like DEI. Something to manage around.
+
+But the truth is this.
+
+Inclusion at the outset encourages belonging. Which means that at the point of decision a diversity of thought has naturally occurred. No faking it. No slowing down to implement. It is just happening because it was built in from the beginning.
+
+And research shows time and time again how this leads to successful, sustainable, innovative businesses that thrive using curiosity, creativity, and innovation.
+But now we have our own proof. Our own data points.
+
+A healthy thriving culture correlates to the success of Gusto. To the success of what we create. To the success of how we deliver.
+
+It can set us apart. It can be THE thing that sets us apart.
+
+the numbers behind the truth
+
+thousands of gusties connected across 9 affinity group channels
+representing the majority of our entire organization
+9 affinity groups. 100% launch rate.
+executive sponsors deeply engaged across every group
+consistently exceptional event NPS scores
+100% of attendees reported stronger belonging. every event. every time.
+SAM and SES scores tracked and measured against slack industry benchmarks
+retention signals captured and converted to dollar value impact
+
+
+what this means
+
+belonging is not a feeling we are chasing. it is a behavior we are measuring.
+when gusties show up to their channels, reply to each other, react to each other, find each other... that is not soft data. that is evidence that the conditions for innovation are present.
+
+and when they stay at gusto because of those conditions... that is retained value with a dollar sign attached.
+
+what we are building
+
+a culture intelligence system that connects community health to business outcomes. automatically. in real time. so that the next time someone asks "what does culture actually do here" the answer is not a feeling.
+
+it is a number. it is a story. it is proof.
+
+this is the north star. everything we build ladders up to this.
