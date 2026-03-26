@@ -1,16 +1,22 @@
-# React + Vite
+# Culture Impact Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Track community activities, measure business outcomes, and quantify cultural ROI.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Activity Tracking** - Log ERG events, mentorship programs, wellness initiatives, and more
+- **Business Outcomes** - Tag activities with outcomes like retention, performance, engagement, hiring, and wellbeing
+- **ROI Calculator** - Calculate retained dollar value using industry-standard 1.5x salary replacement cost
+- **Executive Narratives** - Generate AI-powered summaries to share your culture impact with leadership
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React + Vite
+- CSS custom properties for theming
