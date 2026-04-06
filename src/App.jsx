@@ -2,11 +2,11 @@ import { useState, useMemo } from 'react'
 import './App.css'
 
 const OUTCOME_TYPES = [
-  { id: 'retention', label: 'Retention', icon: '🔒' },
-  { id: 'performance', label: 'Performance', icon: '📈' },
-  { id: 'engagement', label: 'Engagement', icon: '💬' },
-  { id: 'hiring', label: 'Hiring', icon: '🎯' },
-  { id: 'wellbeing', label: 'Wellbeing', icon: '❤️' },
+  { id: 'retention', label: 'Retention', icon: '🔒', description: 'People stayed because they felt connected and valued here.' },
+  { id: 'performance', label: 'Performance', icon: '📈', description: 'Teams delivered better work through collaboration and trust.' },
+  { id: 'engagement', label: 'Engagement', icon: '💬', description: 'People showed up, participated, contributed their voice, and deepened connections with their team.' },
+  { id: 'hiring', label: 'Hiring', icon: '🎯', description: 'Culture reputation helped attract and close top candidates.' },
+  { id: 'wellbeing', label: 'Wellbeing', icon: '❤️', description: 'People felt mentally and emotionally supported at work, reducing stress and burnout risk.' },
 ]
 
 const INITIAL_ACTIVITIES = [
@@ -47,7 +47,7 @@ function App() {
   const [showModal, setShowModal] = useState(false)
   const [narrative, setNarrative] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
-  const [avgCompanySalary, setAvgCompanySalary] = useState(90000)
+  const [avgCompanySalary, setAvgCompanySalary] = useState(65000)
 
   // Form state
   const [formData, setFormData] = useState({
@@ -336,14 +336,16 @@ Continue investing in culture initiatives with demonstrated ROI. Our data shows 
                   <label>Business Outcomes</label>
                   <div className="outcomes-selector">
                     {OUTCOME_TYPES.map(outcome => (
-                      <button
-                        key={outcome.id}
-                        type="button"
-                        className={`outcome-tag ${outcome.id} ${formData.outcomes.includes(outcome.id) ? 'selected' : ''}`}
-                        onClick={() => toggleOutcome(outcome.id)}
-                      >
-                        {outcome.icon} {outcome.label}
-                      </button>
+                      <div key={outcome.id} className="outcome-option">
+                        <button
+                          type="button"
+                          className={`outcome-tag ${outcome.id} ${formData.outcomes.includes(outcome.id) ? 'selected' : ''}`}
+                          onClick={() => toggleOutcome(outcome.id)}
+                        >
+                          {outcome.icon} {outcome.label}
+                        </button>
+                        <span className="outcome-description">{outcome.description}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -389,6 +391,9 @@ Continue investing in culture initiatives with demonstrated ROI. Our data shows 
                   step="1000"
                 />
               </div>
+              <p className="settings-note">
+                Used to calculate retention value when no specific salary is entered. Default is $65,000 (US median wage). Adjust this to match your organization's average salary for more accurate ROI calculations.
+              </p>
             </div>
           </div>
 
