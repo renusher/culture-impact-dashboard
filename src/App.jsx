@@ -44,6 +44,7 @@ const INITIAL_ACTIVITIES = [
 
 function App() {
   const [activities, setActivities] = useState(INITIAL_ACTIVITIES)
+  const [showBanner, setShowBanner] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [narrative, setNarrative] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
@@ -192,6 +193,13 @@ Continue investing in culture initiatives with demonstrated ROI. Our data shows 
 
   return (
     <div className="dashboard">
+      {showBanner && (
+        <div className="info-banner">
+          <span>This tool comes pre-loaded with sample data. Click the remove buttons to clear it and add your own.</span>
+          <button className="banner-dismiss" onClick={() => setShowBanner(false)} aria-label="Dismiss">×</button>
+        </div>
+      )}
+
       <header className="dashboard-header">
         <h1>Culture Impact Dashboard</h1>
         <p>Track community activities, measure business outcomes, and quantify cultural ROI</p>
