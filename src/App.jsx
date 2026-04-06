@@ -195,7 +195,7 @@ Continue investing in culture initiatives with demonstrated ROI. Our data shows 
     <div className="dashboard">
       {showBanner && (
         <div className="info-banner">
-          <span>This tool comes pre-loaded with sample data. Click the remove buttons to clear it and add your own.</span>
+          <span><strong>Sample Data Loaded</strong> — This tool comes pre-loaded with example activities. Click the <strong>×</strong> buttons next to each activity to clear them and add your own.</span>
           <button className="banner-dismiss" onClick={() => setShowBanner(false)} aria-label="Dismiss">×</button>
         </div>
       )}
