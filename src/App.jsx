@@ -453,7 +453,14 @@ Continue investing in culture initiatives with demonstrated ROI. Our data shows 
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <h2>Executive Narrative</h2>
-              <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
+              <div className="modal-actions">
+                {!isGenerating && narrative && (
+                  <button className="btn btn-secondary btn-print" onClick={() => window.print()}>
+                    Print / Save PDF
+                  </button>
+                )}
+                <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
+              </div>
             </div>
             <div className="modal-body">
               {isGenerating ? (

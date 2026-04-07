@@ -603,3 +603,76 @@
   color: var(--gray-500);
   line-height: 1.5;
 }
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-print {
+  font-size: 13px;
+  padding: 8px 14px;
+}
+
+/* Print Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .modal,
+  .modal * {
+    visibility: visible;
+  }
+
+  .modal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+    box-shadow: none;
+    border: none;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    background: white;
+  }
+
+  .modal-header {
+    border-bottom: 2px solid #333;
+    padding-bottom: 16px;
+  }
+
+  .modal-actions,
+  .modal-close {
+    display: none !important;
+  }
+
+  .modal-body {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .narrative-content {
+    color: #000;
+    font-size: 12pt;
+    line-height: 1.6;
+  }
+
+  .narrative-content h3 {
+    color: #000;
+    font-size: 14pt;
+    margin-top: 20pt;
+    page-break-after: avoid;
+  }
+
+  .narrative-content p,
+  .narrative-content li {
+    page-break-inside: avoid;
+  }
+}
