@@ -282,6 +282,35 @@ Continue investing in culture initiatives with demonstrated ROI. Our data shows 
               ))
             )}
           </div>
+
+          {/* Retained Value Chart */}
+          {activities.some(a => a.retainedEmployees > 0) && (
+            <div className="card" style={{ marginTop: '24px' }}>
+              <div className="card-header">
+                <h2>Retained Value by Activity</h2>
+              </div>
+              <div className="card-body">
+                <div className="bar-chart">
+                  {activities
+                    .filter(a => a.retainedEmployees > 0)
+                    .map(activity => {
+                      const value = activity.retainedEmployees * (activity.avgSalary || avgCompanySalary) * 1.5
+                      const maxValue = Math.max(...activities.map(a => a.retainedEmployees * (a.avgSalary || avgCompanySalary) * 1.5))
+                      const percentage = maxValue > 0 ? (value / maxValue) * 100 : 0
+                      return (
+                        <div key={activity.id} className="bar-row">
+                          <div className="bar-label">{activity.title}</div>
+                          <div className="bar-container">
+                            <div className="bar-fill" style={{ width: `${percentage}%` }}></div>
+                            <span className="bar-value">{formatCurrency(value)}</span>
+                          </div>
+                        </div>
+                      )
+                    })}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Right Sidebar */}
@@ -429,6 +458,9 @@ Continue investing in culture initiatives with demonstrated ROI. Our data shows 
                   <span className="value">{formatCurrency(metrics.retainedValue)}</span>
                 </div>
               </div>
+              <p className="roi-citation">
+                The 1.5x salary replacement cost is based on research from Gallup and Deloitte on the true cost of employee turnover, including recruiting, onboarding, lost productivity, and institutional knowledge.
+              </p>
             </div>
           </div>
 
