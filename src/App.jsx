@@ -1,27 +1,6 @@
 import { useState, useMemo } from 'react'
 import './App.css'
 
-const INITIAL_PROGRAMS = [
-  {
-    id: 1,
-    name: 'ERG Programs',
-    plannedBudget: 25000,
-    actualSpent: 18500,
-  },
-  {
-    id: 2,
-    name: 'Mentorship & Development',
-    plannedBudget: 40000,
-    actualSpent: 32000,
-  },
-  {
-    id: 3,
-    name: 'Wellness Initiatives',
-    plannedBudget: 15000,
-    actualSpent: 12000,
-  },
-]
-
 const OUTCOME_TYPES = [
   { id: 'retention', label: 'Retention', icon: '🔒', description: 'People stayed because they felt connected and valued here.' },
   { id: 'performance', label: 'Performance', icon: '📈', description: 'Teams delivered better work through collaboration and trust.' },
@@ -65,8 +44,6 @@ const INITIAL_ACTIVITIES = [
 
 function App() {
   const [activities, setActivities] = useState(INITIAL_ACTIVITIES)
-  const [programs, setPrograms] = useState(INITIAL_PROGRAMS)
-  const [totalBudget, setTotalBudget] = useState(100000)
   const [showBanner, setShowBanner] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [narrative, setNarrative] = useState('')
@@ -82,12 +59,6 @@ function App() {
     outcomes: [],
     retainedEmployees: '',
     avgSalary: '',
-  })
-
-  // Program form state
-  const [programForm, setProgramForm] = useState({
-    name: '',
-    plannedBudget: '',
   })
 
   // Calculate metrics
@@ -110,15 +81,6 @@ function App() {
     return { totalActivities, totalParticipants, totalRetained, retainedValue, outcomeCounts }
   }, [activities, avgCompanySalary])
 
-  // Calculate budget metrics
-  const budgetMetrics = useMemo(() => {
-    const totalPlanned = programs.reduce((sum, p) => sum + p.plannedBudget, 0)
-    const totalSpent = programs.reduce((sum, p) => sum + p.actualSpent, 0)
-    const remaining = totalBudget - totalSpent
-    const unallocated = totalBudget - totalPlanned
-    return { totalPlanned, totalSpent, remaining, unallocated }
-  }, [programs, totalBudget])
-
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
@@ -135,37 +97,6 @@ function App() {
 
   const deleteActivity = (id) => {
     setActivities(prev => prev.filter(a => a.id !== id))
-  }
-
-  const addProgram = (e) => {
-    e.preventDefault()
-    if (!programForm.name || !programForm.plannedBudget) return
-
-    const newProgram = {
-      id: Date.now(),
-      name: programForm.name,
-      plannedBudget: parseInt(programForm.plannedBudget) || 0,
-      actualSpent: 0,
-    }
-
-    setPrograms(prev => [...prev, newProgram])
-    setProgramForm({ name: '', plannedBudget: '' })
-  }
-
-  const updateProgramSpent = (id, newSpent) => {
-    setPrograms(prev => prev.map(p =>
-      p.id === id ? { ...p, actualSpent: parseInt(newSpent) || 0 } : p
-    ))
-  }
-
-  const updateProgramBudget = (id, newBudget) => {
-    setPrograms(prev => prev.map(p =>
-      p.id === id ? { ...p, plannedBudget: parseInt(newBudget) || 0 } : p
-    ))
-  }
-
-  const deleteProgram = (id) => {
-    setPrograms(prev => prev.filter(p => p.id !== id))
   }
 
   const handleSubmit = (e) => {
@@ -380,140 +311,6 @@ Continue investing in culture initiatives with demonstrated ROI. Our data shows 
               </div>
             </div>
           )}
-
-          {/* Budget Planning */}
-          <div className="card" style={{ marginTop: '24px' }}>
-            <div className="card-header">
-              <h2>Budget Planning</h2>
-              <div className="budget-total-input">
-                <label>Total Budget:</label>
-                <input
-                  type="number"
-                  value={totalBudget}
-                  onChange={(e) => setTotalBudget(parseInt(e.target.value) || 0)}
-                  min="0"
-                  step="1000"
-                />
-              </div>
-            </div>
-            <div className="card-body">
-              {/* Budget Summary */}
-              <div className="budget-summary">
-                <div className="budget-summary-item">
-                  <span className="label">Total Budget</span>
-                  <span className="value">{formatCurrency(totalBudget)}</span>
-                </div>
-                <div className="budget-summary-item">
-                  <span className="label">Allocated</span>
-                  <span className="value">{formatCurrency(budgetMetrics.totalPlanned)}</span>
-                </div>
-                <div className="budget-summary-item">
-                  <span className="label">Spent</span>
-                  <span className="value">{formatCurrency(budgetMetrics.totalSpent)}</span>
-                </div>
-                <div className="budget-summary-item highlight">
-                  <span className="label">Remaining</span>
-                  <span className="value">{formatCurrency(budgetMetrics.remaining)}</span>
-                </div>
-              </div>
-
-              {/* Budget Progress Bar */}
-              <div className="budget-progress">
-                <div className="budget-progress-bar">
-                  <div
-                    className="budget-progress-spent"
-                    style={{ width: `${Math.min((budgetMetrics.totalSpent / totalBudget) * 100, 100)}%` }}
-                  ></div>
-                  <div
-                    className="budget-progress-planned"
-                    style={{ width: `${Math.min(((budgetMetrics.totalPlanned - budgetMetrics.totalSpent) / totalBudget) * 100, 100 - (budgetMetrics.totalSpent / totalBudget) * 100)}%` }}
-                  ></div>
-                </div>
-                <div className="budget-progress-legend">
-                  <span><span className="dot spent"></span> Spent</span>
-                  <span><span className="dot planned"></span> Allocated</span>
-                  <span><span className="dot remaining"></span> Unallocated</span>
-                </div>
-              </div>
-
-              {/* Programs List */}
-              <div className="programs-list">
-                <h3>Programs</h3>
-                {programs.length === 0 ? (
-                  <p className="empty-programs">No programs yet. Add your first program below.</p>
-                ) : (
-                  programs.map(program => (
-                    <div key={program.id} className="program-item">
-                      <div className="program-header">
-                        <span className="program-name">{program.name}</span>
-                        <button
-                          className="btn-delete"
-                          onClick={() => deleteProgram(program.id)}
-                          aria-label="Delete program"
-                        >
-                          ×
-                        </button>
-                      </div>
-                      <div className="program-fields">
-                        <div className="program-field">
-                          <label>Planned</label>
-                          <input
-                            type="number"
-                            value={program.plannedBudget}
-                            onChange={(e) => updateProgramBudget(program.id, e.target.value)}
-                            min="0"
-                            step="100"
-                          />
-                        </div>
-                        <div className="program-field">
-                          <label>Spent</label>
-                          <input
-                            type="number"
-                            value={program.actualSpent}
-                            onChange={(e) => updateProgramSpent(program.id, e.target.value)}
-                            min="0"
-                            step="100"
-                          />
-                        </div>
-                        <div className="program-variance">
-                          {program.actualSpent <= program.plannedBudget ? (
-                            <span className="under-budget">
-                              {formatCurrency(program.plannedBudget - program.actualSpent)} under
-                            </span>
-                          ) : (
-                            <span className="over-budget">
-                              {formatCurrency(program.actualSpent - program.plannedBudget)} over
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-
-              {/* Add Program Form */}
-              <form className="add-program-form" onSubmit={addProgram}>
-                <input
-                  type="text"
-                  placeholder="Program name"
-                  value={programForm.name}
-                  onChange={(e) => setProgramForm(prev => ({ ...prev, name: e.target.value }))}
-                  required
-                />
-                <input
-                  type="number"
-                  placeholder="Budget"
-                  value={programForm.plannedBudget}
-                  onChange={(e) => setProgramForm(prev => ({ ...prev, plannedBudget: e.target.value }))}
-                  min="0"
-                  step="100"
-                  required
-                />
-                <button type="submit" className="btn btn-primary">Add</button>
-              </form>
-            </div>
-          </div>
         </div>
 
         {/* Right Sidebar */}
